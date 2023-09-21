@@ -1,3 +1,10 @@
+const Header = () => {
+return (
+
+)
+}
+
+
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'
@@ -7,6 +14,7 @@ const App = () => {
   const part3 = 'State of a component'
   const exercises3 = 14
   
+
   return (
     <div>
       <h1>{course}</h1>
