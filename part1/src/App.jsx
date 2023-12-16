@@ -1,31 +1,44 @@
-const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
-  }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'State of a component',
-    exercises: 14
-  }
+import { useState } from 'react'
+
+const Statistics = ({good, neutral, bad}) => {
+  const total = good + neutral + bad
+
+  if (total === 0) return (
+    <>
+      <p>Statistics</p>
+      <div>No feedback given</div>
+    </>
+  )
+
+  const average = (good - bad) / total
+  const positive = (good / total * 100) + '%'
   
   return (
+    <>
+      <p>Statistics</p>
+      <StatisticsLine text='Good' value={good} />
+      <StatisticsLine text='Neutral' value={neutral} />
+      <StatisticsLine text='Bad' value={bad} />
+      <StatisticsLine text='Average' value={average} />
+      <StatisticsLine text='Positive' value={positive} />
+    </>
+  )
+}
+
+const StatisticsLine = ({text, value}) => <div>{text} {value}</div>
+
+const App = () => {
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <p>Feedback</p>
+      <button onClick={() => setGood(good + 1)}>Good</button>
+      <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
+      <button onClick={() => setBad(bad + 1)}>Bad</button>
+      <Statistics good={good} neutral={neutral} bad ={bad} />
     </div>
   )
 }
